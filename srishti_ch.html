@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Srishti | The Blockbuster Diva</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.9.10/dist/dotlottie-wc.js" type="module"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+            background-color: #b19cd9; /* Matches the purple background */
+            font-family: 'Fredoka', sans-serif;
+            overflow: hidden;
+        }
+
+        .srishti-header {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            background-image: url('srishti_ch.jpg'); 
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        /* Positioned to the left to avoid overlapping Srishti on the right */
+        .typing-container {
+            width: 800px;
+            position: absolute;
+            top: 30%; 
+            left: 20%; 
+            z-index: 10;
+        }
+
+        .typing-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            letter-spacing: 0.01em;
+            color: #4b0082; /* Deep purple color for contrast */
+            font-weight: 600;
+            text-align: left;
+            display: inline-block;
+            white-space: pre-wrap;
+        }
+
+        /* New Animation - Positioned bottom left */
+        .lottie-container {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            top: 10%;
+            z-index: 5;
+        }
+
+        .back-btn {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            padding: 12px 25px;
+            background: white;
+            color: #4b0082;
+            border-radius: 8px;
+            text-decoration: none;
+            z-index: 100;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        /* Overlay to ensure audio and typing start on first click */
+        #interact-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0);
+            z-index: 9999;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="interact-overlay"></div>
+
+    <audio id="srishti-music">
+        <source src="john.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="srishti-header">
+        <div class="typing-container">
+            <span class="typing-text" id="srishti-desc"></span>
+        </div>
+
+        <!-- Animation Section -->
+        <div class="lottie-container">
+            <dotlottie-wc 
+                src="https://lottie.host/6017b495-6c1a-4011-9cd6-33ed39337764/Fk1HJ18Stb.lottie" 
+                style="width: 200px; height: 200px" 
+                autoplay 
+                loop
+                speed="0.5">
+            </dotlottie-wc>
+        </div>
+    </div>
+
+    <a href="character.html" class="back-btn">&larr; Back to Cast</a>
+
+    <script>
+        const audio = document.getElementById('srishti-music');
+        const overlay = document.getElementById('interact-overlay');
+        const descText = "Srishti Sharma is the kind of person who gives her entire world to the people she loves, pouring every ounce of her heart into her friends without ever asking for a single thing in return. She is the funniest person in the squad, a master at shifting the energy of a room who won’t let you stay sad for a second. While she can be a little tough on the surface, it’s just a layer over one of the most kindhearted spirits imaginable.\n\nDespite the physical miles, she never lets the distance be felt, putting in relentless effort to stay woven into your daily life. To top it all off, she is a culinary genius—easily the best cook you’ll ever meet—who seasons every dish with the same selfless love she gives to her friends. She is totally a blockbuster diva, and the world is her stage. She is very beatiful, and her heart is even more beautiful. She is the kind of person who makes you feel like you can conquer the world just by being around her.";
+        
+        let i = 0;
+        function typeWriter() {
+            if (i < descText.length) {
+                document.getElementById("srishti-desc").innerHTML += descText.charAt(i);
+                i++;
+                setTimeout(typeWriter, 30);
+            }
+        }
+
+        function playJohnSegment() {
+            audio.currentTime = 6;
+            audio.play();
+            audio.ontimeupdate = function() {
+                if (audio.currentTime >= 20) {
+                    audio.currentTime = 6;
+                }
+            };
+        }
+
+        overlay.addEventListener('click', () => {
+            playJohnSegment();
+            overlay.style.display = 'none';
+            typeWriter();
+        });
+
+        window.onload = () => {
+            audio.play().then(() => {
+                audio.pause();
+                playJohnSegment();
+                overlay.style.display = 'none';
+                typeWriter();
+            }).catch(() => {
+                console.log("Waiting for user interaction...");
+            });
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maitraiye | The Iconic Problem</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.9.10/dist/dotlottie-wc.js" type="module"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+            background-color: #b39ddb; /* Matches the purple background */
+            font-family: 'Fredoka', sans-serif;
+            overflow: hidden;
+        }
+
+        .mait-header {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            background-image: url('maitraiye_ch.jpg'); 
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        /* Fixed text container to grow downwards on the left side */
+        .typing-container {
+            width: 700px;
+            position: relative;
+            top: 30%; 
+            left: 25%; 
+            z-index: 10;
+        }
+
+        .typing-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            letter-spacing: 0.01em;
+            color: #2e1a47; /* Deep purple/black for readability */
+            font-weight: 600;
+            text-align: left;
+            display: inline-block;
+            white-space: pre-wrap;
+        }
+
+        /* Animation positioned in the TOP LEFT corner */
+        .lottie-top-left {
+            position: absolute;
+            top: 20px;
+            left: 10px;
+            z-index: 5;
+        }
+
+        .back-btn {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            padding: 12px 25px;
+            background: white;
+            color: #2e1a47;
+            border-radius: 8px;
+            text-decoration: none;
+            z-index: 100;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        #interact-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0);
+            z-index: 9999;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="interact-overlay"></div>
+
+    <audio id="mait-music">
+        <source src="john.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="mait-header">
+        <!-- Animation Section -->
+        <div class="lottie-top-left">
+            <dotlottie-wc 
+                src="https://lottie.host/82309603-33e8-4dca-a2fc-7aaf39830b64/52zVEMlWJO.lottie" 
+                style="width: 250px; height: 250px" 
+                autoplay 
+                loop>
+            </dotlottie-wc>
+        </div>
+
+        <div class="typing-container">
+            <span class="typing-text" id="mait-desc"></span>
+        </div>
+    </div>
+
+    <a href="character.html" class="back-btn">&larr; Back to Cast</a>
+
+    <script>
+        const audio = document.getElementById('mait-music');
+        const overlay = document.getElementById('interact-overlay');
+        const descText = "Maitraiye is the 'Full Tapori' soul of the squad, a fierce all-rounder with the ultimate baddie aesthetic. Whether she’s dominating on the badminton court, stealing the show with her dance moves, or staying ahead in academics, she handles it all with effortless swagger. She is the only one with the legendary guts to take a panga with the strictest history teacher!\n\nMaitraiye comes with a built-in loudspeaker in her neck, possessing a naturally high-volume voice that constantly needs a 'quiet' reminder. But beneath the tough exterior lies the most dependable friend. She is a 'Never Say No' person who keeps her own life aside the moment a friend needs her—the ultimate ride-or-die for her circle.";
+        
+        let i = 0;
+        function typeWriter() {
+            if (i < descText.length) {
+                document.getElementById("mait-desc").innerHTML += descText.charAt(i);
+                i++;
+                setTimeout(typeWriter, 30);
+            }
+        }
+
+        function playJohnSegment() {
+            audio.currentTime = 6;
+            audio.play();
+            audio.ontimeupdate = function() {
+                if (audio.currentTime >= 20) {
+                    audio.currentTime = 6;
+                }
+            };
+        }
+
+        overlay.addEventListener('click', () => {
+            playJohnSegment();
+            overlay.style.display = 'none';
+            typeWriter();
+        });
+
+        window.onload = () => {
+            audio.play().then(() => {
+                audio.pause();
+                playJohnSegment();
+                overlay.style.display = 'none';
+                typeWriter();
+            }).catch(() => {
+                console.log("Waiting for interaction...");
+            });
+        };
+    </script>
+</body>
+</html>

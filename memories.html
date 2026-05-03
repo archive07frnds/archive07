@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Premiere | Sanctuary</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #000;
+        }
+
+        .stage-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background-image: url('memories.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+        }
+
+        /* Aligned exactly over the yellow NEXT button */
+        .next-trigger {
+            position: absolute;
+            bottom: 6%; 
+            right: 12.5%;
+            width: 7%; 
+            height: 5%;
+            cursor: pointer;
+            text-decoration: none;
+            border-radius: 50px;
+            border: none; 
+            background: rgba(255, 255, 255, 0); 
+        }
+
+        .next-trigger:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .back-container {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            z-index: 100;
+        }
+
+        .back-btn {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 6px 15px;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            color: #000000;
+            text-decoration: none;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="premiere-sound">
+        <source src="intro.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="stage-container">
+        <div class="back-container">
+            <a href="dashboard.html" class="back-btn">
+                <span>&larr;</span> Back
+            </a>
+        </div>
+
+        <a href="character.html" class="next-trigger" title="Meet the Characters"></a>
+    </div>
+
+    <script>
+    const audio = document.getElementById('premiere-sound');
+
+    function playCinematicAudio() {
+        // CROP: Start at 2 seconds
+        audio.currentTime = 3; 
+        
+        audio.volume = 0.6;
+        
+        audio.play().then(() => {
+            // STOP: Play for 5 seconds total (so stop at the 7-second mark)
+            setTimeout(() => {
+                audio.pause();
+            }, 6000); 
+            
+        }).catch(error => {
+            // Safety net: if autoplay is blocked, play on first click
+            console.log("Autoplay blocked. Waiting for interaction.");
+            document.addEventListener('click', () => {
+                playCinematicAudio();
+            }, { once: true });
+        });
+    }
+
+    window.addEventListener('load', playCinematicAudio);
+</script>
+
+</body>
+</html>

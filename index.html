@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archive07 | Entrance</title>
+    
+    <link href="https://api.fontshare.com/v2/css?f=neco@700&f=boska@400,400i&f=bonny@500&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+    
+    <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@latest/dist/dotlottie-wc.js" type="module"></script>
+</head>
+<body>
+
+    <div id="entrance-screen">
+        <h1 class="welcome-text">Welcome to the Archive07</h1>
+        <p class="special-text">You are here because you are SPECIAL.</p>
+
+        <div id="lock-wrapper">
+            <dotlottie-wc 
+                id="lottie-lock" 
+                src="https://lottie.host/37d07454-1422-47d0-9daa-ee58e07a238d/yNdRq2QmZv.lottie" 
+                speed="1" 
+                style="width: 500px; height: 500px"
+                mode="forward">
+            </dotlottie-wc>
+        </div>
+
+        <div class="input-area">
+            <p class="hint">Hint: <i>jaaneman</i></p>
+            <input type="password" id="password-input" placeholder="Enter the secret word...">
+            <button onclick="checkPassword()">Unlock the Archive</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+

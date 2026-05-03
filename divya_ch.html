@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Divya | The Pretty Problem</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+            background-color: #f7d9e1; 
+            font-family: 'Fredoka', sans-serif; /* Neco-style bold rounded font */
+            overflow-x: hidden;
+        }
+
+        /* Fixed the Header and added Z-Index to prevent scroll glitch */
+        .divya-header {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            background-image: url('divya_ch.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            z-index: 1; /* Keep base image at bottom */
+        }
+
+        /* Container starting higher up */
+        .typing-container {
+            max-width: 700px;
+            position: relative;
+            top: 32%; /* Moved up from 50% to sit better under the title */
+            left: 45%; /* Adjusted to center better with the text in your image */
+            transform: translate(-50%, 0);
+            z-index: 2;
+            pointer-events: none; /* Allows clicks to pass through to buttons if needed */
+        }
+
+        .typing-text {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            /* Matching the pinkish-purple from 'Divya' text */
+            color: #1E104E; 
+            font-weight: 600;
+            text-align: left;
+            display: inline-block;
+            white-space: pre-wrap;
+        }
+
+        /* Bottom Section / Stories */
+        .stories-section {
+            width: 100vw;
+            height: 100vh;
+            background-color: #f7d9e1; 
+            position: relative;
+            z-index: 10; /* Higher z-index to cover the header when scrolling */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 -20px 30px rgba(0,0,0,0.05); /* Smooth transition shadow */
+        }
+
+        .banner-pop {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 12px 25px;
+            background-color: #7b5bbf;
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            z-index: 100;
+            transition: 0.3s;
+            animation: heartBeat 2s infinite;
+        }
+
+        @keyframes heartBeat {
+            0%, 100% { transform: translateX(-50%) scale(1); }
+            50% { transform: translateX(-50%) scale(1.05); }
+        }
+
+        .back-btn {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            padding: 10px 20px;
+            background: white;
+            color: black;
+            border-radius: 8px;
+            text-decoration: none;
+            z-index: 101;
+            font-size: 14px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <audio id="divya-music" loop>
+        <source src="john.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="divya-header">
+        <div class="typing-container">
+            <span class="typing-text" id="divya-desc"></span>
+        </div>
+    </div>
+
+
+    <a href="character.html" class="back-btn">&larr; Back to Cast</a>
+
+    <script>
+    const audio = document.getElementById('divya-music');
+    const descText = "Divya is a vibrant, high-definition paradox—a happy, radiant soul wrapped in the soft aesthetic of an innocent protagonist. While she carries a 'main character' aura that can shift from sweet to savage in a heartbeat, her true strength lies in her resilience; she is a self-healer who finds her own light even after the most dramatic plot twists. \n\nA master of the silent roast, her calm face is merely camouflage for a razor-sharp wit that backfires on anyone foolish enough to poke her. When she isn’t delivering lethal comebacks, she is likely lost in a binge-watch marathon or hunting for the perfect plate of Biryani, for which her devotion is legendary. Operating on a cycle of infectious laughter, professional-level napping, and a love for double-masala treats, she is the girl who keeps the squad’s script both spicy and soulful.";
+    
+    let i = 0;
+    function typeWriter() {
+        if (i < descText.length) {
+            document.getElementById("divya-desc").innerHTML += descText.charAt(i);
+            i++;
+            setTimeout(typeWriter, 25);
+        }
+    }
+
+    // THE AUTOMATIC AUDIO LOGIC
+    function attemptAutoplay() {
+        audio.volume = 0.5; // Set volume to 50%
+        
+        // Attempt to play immediately
+        const playPromise = audio.play();
+
+        if (playPromise !== undefined) {
+            playPromise.then(_ => {
+                // Autoplay started!
+                console.log("Autoplay success");
+            }).catch(error => {
+                // Autoplay was prevented
+                console.log("Autoplay prevented by browser. Audio will start on first interaction.");
+                
+                // Fallback: Start audio on the very first click or scroll the user does
+                const startOnInteraction = () => {
+                    audio.play();
+                    document.removeEventListener('click', startOnInteraction);
+                    document.removeEventListener('scroll', startOnInteraction);
+                };
+                
+                document.addEventListener('click', startOnInteraction);
+                document.addEventListener('scroll', startOnInteraction);
+            });
+        }
+    }
+
+    window.onload = () => {
+        typeWriter();
+        attemptAutoplay();
+    };
+
+    
+</script>
+</body>
+</html>

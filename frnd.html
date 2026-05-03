@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mitra-Metric | Sanctuary</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #000;
+        }
+
+        .sanctuary-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background-image: url('frnd.jpg');
+            background-size: cover; 
+            background-repeat: no-repeat;
+            background-position: center center;
+        }
+
+        /* Profile row alignment */
+        .profile-overlay {
+            position: absolute;
+            bottom: 12%; 
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            justify-content: center;
+            gap: 1.2%; 
+            width: 78%; 
+            height: 25%;
+        }
+
+        .profile-link {
+            flex: 1;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* White Back Button - Bottom Left Corner */
+        .back-container {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            z-index: 100;
+        }
+
+        .back-btn {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 6px 15px;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            color: #000000;
+            text-decoration: none;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: background 0.2s;
+        }
+
+        .back-btn:hover {
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Audio Element -->
+    <audio id="bg-music" loop>
+        <source src="bg.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <div class="sanctuary-container">
+        
+        <div class="back-container">
+            <a href="dashboard.html" class="back-btn">
+                <span>&larr;</span> Back
+            </a>
+        </div>
+
+        <div class="profile-overlay">
+            <a href="shrishti_jain.html" class="profile-link"></a>
+            <a href="mayuri.html" class="profile-link"></a>
+            <a href="srishti_sharma.html" class="profile-link"></a>
+            <a href="maitraiye.html" class="profile-link"></a>
+            <a href="samriddhi.html" class="profile-link"></a>
+            <a href="shweta.html" class="profile-link"></a>
+            <a href="divya.html" class="profile-link"></a>
+        </div>
+
+    </div>
+
+    <script>
+        const music = document.getElementById('bg-music');
+
+        // Function to start music
+        function startMusic() {
+            music.play().catch(error => {
+                console.log("Autoplay prevented. Music will start on user interaction.");
+            });
+            // Remove the listener once music starts
+            document.removeEventListener('click', startMusic);
+        }
+
+        // Listen for a click anywhere on the page to start music
+        document.addEventListener('click', startMusic);
+
+        // Optional: Attempt autoplay on load
+        window.addEventListener('load', () => {
+            music.volume = 0.5; // Set volume to 50%
+            music.play().catch(() => {
+                console.log("Click to play music");
+            });
+        });
+    </script>
+
+</body>
+</html>

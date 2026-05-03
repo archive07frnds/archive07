@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archive07 | The Sanctuary</title>
+    <style>
+        body, html { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; }
+
+        .dashboard-new {
+            background: url('ute.jpg') no-repeat center center fixed;
+            background-size: cover;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Heart Icon (Top Left) */
+        .notif-trigger {
+            position: fixed;
+            top: 25px;
+            left: 25px;
+            width: 90px;
+            cursor: pointer;
+            z-index: 99999;
+        }
+
+        .heart-pop {
+            width: 100%;
+            animation: heartBeat 2.5s ease-in-out infinite;
+            filter: drop-shadow(0 8px 20px rgba(255, 182, 193, 0.4));
+        }
+
+        @keyframes heartBeat {
+            0%, 100% { transform: scale(1); }
+            15%, 45% { transform: scale(1.1); }
+        }
+
+        /* The Overlay/Modal */
+        .overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(8px);
+            display: none; /* Controlled by JS */
+            justify-content: center;
+            align-items: center;
+            z-index: 100000;
+        }
+
+        .message-card-container {
+            position: relative;
+            width: 600px; /* Adjust to fit your msg.jpg width */
+            height: 450px; /* Adjust to fit your msg.jpg height */
+            background: white;
+            border-radius: 20px;
+            overflow: visible;
+            animation: modalPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes modalPop {
+            from { transform: scale(0.5); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        /* The Iframe loading msg.html */
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 20px;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            background: #e66a7b;
+            color: white;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            z-index: 100001;
+        }
+
+        /* Hitboxes for Calendar and Archive */
+        .hub-interaction-layer {
+            position: absolute;
+            display: flex;
+            gap: 120px;
+        }
+        .stamp-link { width: 280px; height: 280px; border-radius: 50%; text-decoration: none; }
+
+        /* Back Button */
+        .back-box {
+            position: fixed;
+            bottom: 30px; left: 30px;
+            background: white; padding: 10px 20px;
+            border-radius: 6px; text-decoration: none; color: black;
+            font-weight: bold; box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body class="dashboard-new">
+
+    <div class="hub-interaction-layer">
+        <a href="memories.html" class="stamp-link"></a>
+        <a href="frnd.html" class="stamp-link"></a>
+    </div>
+
+    <div class="notif-trigger" id="heartIcon">
+        <img src="heart.png" alt="Heart Letter" class="heart-pop">
+    </div>
+
+    <div id="messageOverlay" class="overlay">
+        <div class="message-card-container">
+            <button class="close-btn" onclick="closeMessage()">×</button>
+            <iframe src="msg.html"></iframe>
+        </div>
+    </div>
+
+    <a href="index.html" class="back-box">⬅ Back</a>
+
+    <script>
+        function openMessage() {
+            document.getElementById('messageOverlay').style.display = 'flex';
+        }
+
+        function closeMessage() {
+            document.getElementById('messageOverlay').style.display = 'none';
+        }
+
+        document.getElementById('heartIcon').onclick = openMessage;
+
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('messageOverlay')) {
+                closeMessage();
+            }
+        }
+    </script>
+</body>
+</html>

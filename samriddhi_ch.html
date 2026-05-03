@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samriddhi | The Hot Mess</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.9.10/dist/dotlottie-wc.js" type="module"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+            background-color: #f1e5a1;
+            font-family: 'Fredoka', sans-serif;
+            overflow: hidden;
+        }
+
+        .sam-header {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            background-image: url('samriddhi_ch.jpg'); 
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        /* Shifted container further right and adjusted width */
+        .typing-container {
+            max-width: 800px;
+            position: relative;
+            top: 25%; 
+            left: 55%; 
+            transform: translate(-50%, 0);
+            z-index: 10;
+        }
+
+        .typing-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            letter-spacing: 0.02em;
+            color: #8c2f39;
+            font-weight: 600;
+            text-align: left;
+            display: inline-block;
+            white-space: pre-wrap;
+        }
+
+        /* Animation Container - Positioned bottom right */
+        .lottie-container {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            z-index: 5;
+            opacity: 0.8; /* Subtle transparency so it doesn't distract too much */
+        }
+
+        .back-btn {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            padding: 10px 20px;
+            background: white;
+            color: #8c2f39;
+            border-radius: 8px;
+            text-decoration: none;
+            z-index: 100;
+            font-size: 14px;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: 0.3s;
+        }
+
+    </style>
+</head>
+<body>
+
+    <audio id="sam-music" loop>
+        <source src="john.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="sam-header">
+        <!-- Text Section -->
+        <div class="typing-container">
+            <span class="typing-text" id="sam-desc"></span>
+        </div>
+
+        <!-- Animation Section -->
+        <div class="lottie-container">
+            <dotlottie-wc 
+                src="https://lottie.host/ef24972d-74bb-4828-b2d7-d1c7dcd194fe/ymXYQjhIUa.lottie" 
+                style="width: 200px; height: 200px" 
+                autoplay 
+                loop
+                speed="0.8">
+            </dotlottie-wc>
+        </div>
+    </div>
+
+    <a href="character.html" class="back-btn">&larr; Back to Cast</a>
+
+    <script>
+        const audio = document.getElementById('sam-music');
+        const descText = "Samriddhi is a 'Hot but Hazardous' whirlwind who is officially too hot to handle. While her cooking skills are currently stuck in the Maggi and sandwich phase, she reigns supreme as the undisputed CEO of the Bartan Dhona Company. Despite being 23, she is still regularly carded for an ID at movie theaters and restaurants. Her survival instincts are equally paradoxical: she will let out a glass-shattering scream at a harmless street dog or a distant insect, yet she transforms into a fearless guardian when it comes to Divya’s phone, risking her own life multiple times to save the device from a fatal drop. A die-hard devotee of Sharma Ji’s white sauce pasta.\n\n Though her first impression might scream 'rude,' getting to know Samriddhi reveals a fiercely loyal best friend you can have. She is the friend who will annoy you and joke around relentlessly, but in any crisis, she is the one you will always find standing right beside you, loving you with everything she has.";
+        
+        let i = 0;
+        function typeWriter() {
+            if (i < descText.length) {
+                document.getElementById("sam-desc").innerHTML += descText.charAt(i);
+                i++;
+                setTimeout(typeWriter, 35);
+            }
+        }
+
+        function attemptAutoplay() {
+            audio.volume = 0.4;
+            const playPromise = audio.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(error => {
+                    const startOnInteraction = () => {
+                        audio.play();
+                        document.removeEventListener('click', startOnInteraction);
+                    };
+                    document.addEventListener('click', startOnInteraction);
+                });
+            }
+        }
+
+        window.onload = () => {
+            typeWriter();
+            attemptAutoplay();
+        };
+    </script>
+</body>
+</html>

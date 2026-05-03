@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Cast | Sanctuary</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            overflow: hidden;
+        }
+
+        .container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        /* The background image scaled to cover the screen */
+        .cast-bg {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Invisible clickable boxes for each character */
+        .char-link {
+            position: absolute;
+            cursor: pointer;
+            /* background: rgba(255, 255, 255, 0.2); /* Uncomment this line to see the boxes for alignment */
+            border-radius: 10px;
+            transition: transform 0.2s ease;
+        }
+
+        .char-link:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Position adjustments for each girl */
+        #link-divya    { top: 25%; left: 30%; width: 10%; height: 20%; }
+        #link-sam      { top: 28%; left: 45%; width: 10%; height: 20%; }
+        #link-shrishti { top: 25%; left: 60%; width: 10%; height: 20%; }
+        
+        #link-mayuri   { top: 55%; left: 20%; width: 10%; height: 20%; }
+        #link-srishti  { top: 55%; left: 37%; width: 10%; height: 20%; }
+        #link-shweta   { top: 55%; left: 54%; width: 10%; height: 20%; }
+        #link-maitraiye { top: 55%; left: 71%; width: 10%; height: 20%; }
+
+        .back-btn {
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            padding: 10px 22px;
+            background: white;
+            color: black;
+            text-decoration: none;
+            font-family: sans-serif;
+            font-weight: bold;
+            border-radius: 6px;
+            z-index: 100;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <img src="character.jpg" alt="Cast" class="cast-bg">
+
+        <a href="divya_ch.html" class="char-link" id="link-divya" title="View Divya"></a>
+        <a href="samriddhi_ch.html" class="char-link" id="link-sam" title="View Samridhhi"></a>
+        <a href="shrishti_ch.html" class="char-link" id="link-shrishti" title="View Shrishti Jain"></a>
+        
+        <a href="mayuri_ch.html" class="char-link" id="link-mayuri" title="View Mayuri"></a>
+        <a href="srishti_ch.html" class="char-link" id="link-srishti" title="View Srishti Sharma"></a>
+        <a href="shweta_ch.html" class="char-link" id="link-shweta" title="View Shweta"></a>
+        <a href="maitraiye_ch.html" class="char-link" id="link-maitraiye" title="View Maitraiye"></a>
+
+        <a href="memories.html" class="back-btn">&larr; Back to Premiere</a>
+    </div>
+
+</body>
+</html>

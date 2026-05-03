@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        /* This ensures the image fills the frame with no white gaps */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            overflow: hidden; 
+            background: transparent; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .message-image { 
+            width: 100%; 
+            height: auto;
+            display: block; 
+            border-radius: 20px; 
+        }
+    </style>
+</head>
+<body>
+    <img src="msg.jpg" alt="Welcome Message" class="message-image">
+</body>
+</html>
